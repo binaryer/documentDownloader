@@ -61,7 +61,16 @@ class book118:
             'readLimit': self.pdfInfo['ReadLimit'],
             'furl': self.pdfInfo['Furl']
         })
-        result = getHTML(url)
+
+        result=''
+        while True:
+            result = getHTML(url)
+            if (result.startswith('{') and result.endswith('}')):
+                break
+            else:
+                print(result, file=sys.stderr)
+
+
         res = json.loads(result)
 
         if self.total == 0:
